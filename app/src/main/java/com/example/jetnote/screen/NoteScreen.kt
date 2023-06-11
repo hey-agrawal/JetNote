@@ -3,11 +3,14 @@ package com.example.jetnote.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.example.jetnote.R
 import com.example.jetnote.components.NoteButton
 import com.example.jetnote.components.NoteInputText
+import com.example.jetnote.data.NotesDataSource
 import com.example.jetnote.model.Note
 
 @Composable
@@ -80,12 +84,17 @@ fun NoteScreen(
                     }
                 })
         }
-
+        Divider(modifier = Modifier.padding(10.dp))
+        LazyColumn{
+            items(notes){
+                note -> Text(text = note.title)
+            }
+        }
     }
 }
  
 @Preview(showBackground = true)
 @Composable
 fun NoteScreenPreview(){
-    NoteScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
+    NoteScreen(notes = NotesDataSource().loadNotes(), onAddNote = {}, onRemoveNote = {})
 }
