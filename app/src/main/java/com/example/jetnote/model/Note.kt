@@ -11,6 +11,8 @@ import java.util.*
 data class Note(
     @PrimaryKey
     val id: UUID = UUID.randomUUID(),
+
+
     @ColumnInfo(name= "note_title")
     val title : String,
 
